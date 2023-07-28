@@ -8,20 +8,25 @@ public class Inventory {
     private String itemName;
     private double itemPrice;
     private String itemType;
-    private int itemQuantity;
+    private double itemQuantity;
     private String[] itemArray;
     private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
 
-    public void setItemQuantity(int itemQuantity) {
+    public void setItemQuantity(int itemQuantity)
+    {
         this.itemQuantity = itemQuantity;
     }
 
     public Inventory() {}
-    public Inventory(String[] itemArray, int itemQuantity) {
+
+    public Inventory(String[] itemArray, int itemQuantity)
+    {
         this.itemArray = itemArray;
         this.itemQuantity = itemQuantity;
     }
-    public Inventory(String itemLocation, String itemName, double itemPrice, String itemType, int itemQuantity) {
+
+    public Inventory(String itemLocation, String itemName, double itemPrice, String itemType, int itemQuantity)
+    {
         this.itemLocation = itemLocation;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
@@ -29,43 +34,53 @@ public class Inventory {
         this.itemQuantity = 5;
     }
 
-    public String getItemLocation() {
+    public String getItemLocation()
+    {
         return itemLocation;
     }
 
-    public void setItemLocation(String itemLocation) {
+    public void setItemLocation(String itemLocation)
+    {
         this.itemLocation = itemLocation;
     }
 
-    public String getItemName() {
+    public String getItemName()
+    {
         return itemName;
     }
 
-    public void setItemName(String itemName) {
+    public void setItemName(String itemName)
+    {
         this.itemName = itemName;
     }
 
-    public double getItemPrice() {
+    public double getItemPrice()
+    {
         return itemPrice;
     }
 
-    public void setItemPrice(double itemPrice) {
+    public void setItemPrice(double itemPrice)
+    {
         this.itemPrice = itemPrice;
     }
 
-    public String getItemType() {
+    public String getItemType()
+    {
         return itemType;
     }
 
-    public void setItemType(String itemType) {
+    public void setItemType(String itemType)
+    {
         this.itemType = itemType;
     }
 
-    public int getItemQuantity() {
+    public double getItemQuantity()
+    {
         return itemQuantity;
     }
 
-    public void setItemQuantity() {
+    public void setItemQuantity(double itemQuantity)
+    {
         this.itemQuantity = itemQuantity;
     }
 

@@ -31,18 +31,18 @@ public class InventoryManager {
         addInventory();
         for (Inventory inventoryItem : inventoryList) {
             System.out.println(inventoryItem.getItemLocation() + "\t" + inventoryItem.getItemName() + "\t"
-                    + inventoryItem.getItemPriceAsCurrency() + "\t" + inventoryItem.getItemType() + "\t"
+                    + inventoryItem.getItemPrice() + "\t" + inventoryItem.getItemType() + "\t"
                     + inventoryItem.getItemQuantity());
         }
     }
 
     private void addInventory() { // edit this to pull from main.csv
         this.inventoryList.add(new Inventory("A1", "U-Chews",
-                BigDecimal.valueOf(1.65), "Gum", 5));
+                1.65, "Gum", 5));
         this.inventoryList.add(new Inventory("A2", "Ginger Ayle",
-                BigDecimal.valueOf(1.85), "Drink", 5));
+                1.85, "Drink", 5));
         this.inventoryList.add(new Inventory("A3", "Snykkers",
-                BigDecimal.valueOf(4.25), "Candy", 5));
+                4.25, "Candy", 5));
     }
 
 }

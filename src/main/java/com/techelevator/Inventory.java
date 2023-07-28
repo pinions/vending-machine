@@ -2,24 +2,26 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Inventory {
     private String itemLocation;
     private String itemName;
-    private BigDecimal itemPrice;
+    private double itemPrice;
     private String itemType;
+    private int itemQuantity;
+    private String[] itemArray;
+    private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
 
     public void setItemQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
 
-    private int itemQuantity;
-    private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
-
-    public Inventory() {};
-    public Inventory(String itemLocation, String itemName, BigDecimal itemPrice, String itemType, int itemQuantity) {
+    public Inventory() {}
+    public Inventory(String[] itemArray, int itemQuantity) {
+        this.itemArray = itemArray;
+        this.itemQuantity = itemQuantity;
+    }
+    public Inventory(String itemLocation, String itemName, double itemPrice, String itemType, int itemQuantity) {
         this.itemLocation = itemLocation;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
@@ -43,11 +45,11 @@ public class Inventory {
         this.itemName = itemName;
     }
 
-    public String getItemPriceAsCurrency() {
-        return numberFormat.format(itemPrice);
+    public double getItemPrice() {
+        return itemPrice;
     }
 
-    public void setItemPrice(BigDecimal itemPrice) {
+    public void setItemPrice(double itemPrice) {
         this.itemPrice = itemPrice;
     }
 
@@ -61,6 +63,10 @@ public class Inventory {
 
     public int getItemQuantity() {
         return itemQuantity;
+    }
+
+    public void setItemQuantity() {
+        this.itemQuantity = itemQuantity;
     }
 
 }

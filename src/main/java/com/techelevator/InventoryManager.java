@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+<<<<<<< HEAD
 public class InventoryManager {
     private List<Inventory> inventoryList = new ArrayList<>();
     private static int itemQuantity = 5;
@@ -16,10 +17,36 @@ public class InventoryManager {
         try (Scanner scanner = new Scanner(inventoryInput)) {
             // adding item to array
             while (scanner.hasNextLine()) {
+=======
+public class InventoryManager
+{
+    private List<Inventory> inventoryList = new ArrayList<>();
+    private static int itemQuantity = 5;
+
+    public void createInventory()
+    {
+        File inventoryInput = new File("main.csv");
+
+        try (Scanner scanner = new Scanner(inventoryInput))
+        {
+            // adding item to array
+            while (scanner.hasNextLine())
+            {
+>>>>>>> cfdf6d48c8633a6c89bae45f93821278c32c2c4a
                 String item = scanner.nextLine();
                 String[] itemArray = item.split(",");
                 this.inventoryList.add(new Inventory(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]),
                         itemArray[3], itemQuantity));
+<<<<<<< HEAD
+=======
+            }
+            // looping through items to print
+            for (Inventory inventory : inventoryList)
+            {
+                System.out.println(inventory.getItemLocation() + "\t" + inventory.getItemName() + "\t"
+                        + inventory.getItemPrice() + "\t" + inventory.getItemType() + "\t"
+                        + inventory.getItemQuantity());
+>>>>>>> cfdf6d48c8633a6c89bae45f93821278c32c2c4a
             }
             // looping through items to print
             for (Inventory inventory : inventoryList) {

@@ -31,5 +31,4 @@ public class InventoryManager {
             throw new RuntimeException(e);
         }
     }
-
 }

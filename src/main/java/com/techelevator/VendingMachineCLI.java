@@ -20,6 +20,9 @@ public class VendingMachineCLI {
 
 	private InventoryManager inventoryManager = new InventoryManager();
 	private PurchaseMenuDisplay purchaseMenu = new PurchaseMenuDisplay();
+	private BalanceTracker balanceTracker = new BalanceTracker();
+
+	private int currentMoney = 0;
 
 //	private static int currentMoney = 0;
 
@@ -64,6 +67,63 @@ public class VendingMachineCLI {
 			System.out.println();
 			System.out.println("Press any key to return to the main menu.");
 			scanner.nextLine();
+		}
+	}
+
+		public void purchaseMenu() {
+		while (true) {
+			System.out.println();
+			System.out.println("Current Money Provided: " + currentMoney);
+			System.out.println();
+
+			System.out.println("1) Feed Money");
+			System.out.println("2) Select Product");
+			System.out.println("3) Finish Transaction");
+
+			System.out.println();
+			System.out.println("Please input a value 1 to 3.");
+			String userInput = scanner.nextLine();
+
+			switch (userInput) {
+				case "1": // feed money into machine in int
+					System.out.println();
+					System.out.println("Please input a value in whole dollars.");
+					feedMoney();
+					break;
+				case "2": // purchase
+					System.out.println();
+					System.out.println("Select a product.");
+					// method here
+					break;
+				case "3": // exit
+					System.out.println();
+					System.out.println("Thank you for your patronage. Goodbye!");
+					System.exit(1);
+					break;
+				default: // catch incorrect input
+					System.out.println();
+					System.out.println("Please input a value 1 to 3.");
+					userInput = scanner.nextLine();
+					break;
+			}
+			System.out.println();
+			System.out.println("Press any key to return to the purchase menu.");
+			userInput = scanner.nextLine();
+		}
+	}
+
+	public void feedMoney() {
+		String userInput = scanner.nextLine();
+
+		if (scanner.hasNextInt()) {
+			int inputMoney = Integer.parseInt(scanner.nextLine());
+			currentMoney += inputMoney;
+			userInput = scanner.nextLine();
+
+			System.out.println("Current Money Provided: " + currentMoney);
+		} else {
+			System.out.println();
+			System.out.println("Please input a value in whole dollars.");
 		}
 	}
 

@@ -2,57 +2,40 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class InventoryManager {
+public class InventoryManager
+{
+    private List<Inventory> inventoryList = new ArrayList<>();
+    private static int itemQuantity = 5;
 
-    private List<Inventory> inventoryList = new ArrayList<>();  //
-    private final Scanner userInput = new Scanner(System.in);
-
-
-    public static void main(String[] args)
+    public void createInventory()
     {
-        InventoryManager inventoryManager = new InventoryManager();
-        inventoryManager.run();
-    }
-
-    public void run() {
         File inventoryInput = new File("main.csv");
 
-        try (Scanner userInput = new Scanner(inventoryInput))
+        try (Scanner scanner = new Scanner(inventoryInput))
         {
-            while (userInput.hasNextLine())
+            // adding item to array
+            while (scanner.hasNextLine())
             {
-                String line = userInput.nextLine();
-                line.split(",");
+                String item = scanner.nextLine();
+                String[] itemArray = item.split(",");
+                this.inventoryList.add(new Inventory(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]),
+                        itemArray[3], itemQuantity));
+            }
+            // looping through items to print
+            for (Inventory inventory : inventoryList)
+            {
+                System.out.println(inventory.getItemLocation() + "\t" + inventory.getItemName() + "\t"
+                        + inventory.getItemPrice() + "\t" + inventory.getItemType() + "\t"
+                        + inventory.getItemQuantity());
             }
         }
         catch (FileNotFoundException e)
         {
             throw new RuntimeException(e);
         }
-
-        addInventory();
-
-        for (Inventory inventoryItem : inventoryList)
-        {
-            System.out.println(inventoryItem.getItemLocation() + "\t" + inventoryItem.getItemName() + "\t"
-                    + inventoryItem.getItemPrice() + "\t" + inventoryItem.getItemType() + "\t"
-                    + inventoryItem.getItemQuantity());
-        }
     }
-
-    private void addInventory() // edit this to pull from main.csv
-    {
-        this.inventoryList.add(new Inventory("A1", "U-Chews",
-                1.65, "Gum", 5));
-        this.inventoryList.add(new Inventory("A2", "Ginger Ayle",
-                1.85, "Drink", 5));
-        this.inventoryList.add(new Inventory("A3", "Snykkers",
-                4.25, "Candy", 5));
-    }
-
 }

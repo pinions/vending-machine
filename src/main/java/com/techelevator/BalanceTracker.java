@@ -4,41 +4,28 @@ import java.util.Scanner;
 
 public class BalanceTracker {
     // Variables
-    // this keeps the amount
-    private double currentBalance = 0.00;
-
-    // used to reset bal to 0 after done in menu 2
-    private double startingBalance = 0.00;
-
-    // money subtracted is accounted for as PROD PRICE : TOTAL BAL updated after Dispense
-    private double amountSubtracted;
-
-    // variable
     private int amountInput;
+    private double currentBalance = 0.00;   // tracks TOTAL
+    private double startingBalance = 0.00;  // resets TOTAL to 0
 
-
-    // getters
+    // --------------  getters  -----------------
     public double getCurrentBalance()
     {
         return currentBalance;
     }
 
-    public double getAmountSubtracted()
-    {
-        return amountSubtracted;
-    }
-
     public int getAmountInput()
     {
-        // while the user would like to continue to deposit money
         boolean isUserDone = false;
 
-        while (isUserDone) {
+        while (isUserDone)  // while the user would like to continue to deposit money
+        {
             // prompt user to enter an INT for dollar amount
             Scanner input = new Scanner(System.in);
             System.out.print("Enter a dollar amount, as a whole number, that you would like to deposit: ");
-            String userInputForDeposit = input.nextLine();
 
+            // store and change input to INT
+            String userInputForDeposit = input.nextLine();
             int userDepositAsInt = Integer.parseInt(userInputForDeposit);
 
             amountInput += userDepositAsInt;
@@ -54,21 +41,15 @@ public class BalanceTracker {
         return amountInput;
     }
 
-    // setters
-    public void setCurrentBalanceAdded()      // FIGURE OUT WHERE/HOW TO CALL/IMPLEMENT
+    // ------------------  setters  ---------------------
+    public void setCurrentBalanceAdded(double balanceAdded)  // FEED MONEY
     {
-        this.currentBalance = getCurrentBalance() + amountInput;
+        this.currentBalance = getCurrentBalance() + balanceAdded;
     }
 
-    public void setCurrentBalanceSubtracted()     // subtract after each product dispense
+    public void setCurrentBalanceSubtracted(double purchasePrice)     // subtract after each product dispense
     {
-        this.currentBalance = getCurrentBalance() - getAmountSubtracted();
-    }
-
-    // retrieve and set to PRICE -> NEED TO INPUT PURCHASE PRICE
-    public void setAmountSubtracted(double amountSubtracted)
-    {
-        this.amountSubtracted = amountSubtracted;
+        this.currentBalance = getCurrentBalance() - purchasePrice;
     }
 
     public void setCurrentToStartBalance()

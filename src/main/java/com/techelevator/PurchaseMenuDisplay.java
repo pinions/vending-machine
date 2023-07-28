@@ -37,8 +37,7 @@ public class PurchaseMenuDisplay
                     System.out.println();
 
                     // routes to 'feed money' -> deposit
-                    balanceTracker.getAmountInput();
-                    balanceTracker.setCurrentBalanceAdded();
+                    balanceTracker.setCurrentBalanceAdded(balanceTracker.getAmountInput());
 
                     incorrectInput = false;
                     break;
@@ -70,7 +69,7 @@ public class PurchaseMenuDisplay
 
                 default:
                     System.out.println();
-                    System.out.println("Please input a value 1 to 3.");
+                    System.out.println("Please input a number to select desired location: ");
                     userInput = scanner.nextLine();
                     break;
 

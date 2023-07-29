@@ -7,9 +7,6 @@ import java.util.Scanner;
  * your project. Feel free to refactor this code as you see fit.
  */
 public class VendingMachineCLI {
-
-	private static final Scanner scanner = new Scanner(System.in);
-
 	private MenuDisplay menuDisplay = new MenuDisplay();
 	private PurchaseMenuDisplay purchaseDisplay = new PurchaseMenuDisplay();
 

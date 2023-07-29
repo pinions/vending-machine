@@ -14,7 +14,7 @@ public class InventoryManagerTest
 
 
         // Assert
-        Assert.assertEquals( , inventoryManager.);
+        //Assert.assertEquals( , inventoryManager.);
 
 
 

@@ -12,9 +12,7 @@ public class Inventory {
     private String[] itemArray;
     private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
 
-    public void setItemQuantity(int itemQuantity) {
-        this.itemQuantity = itemQuantity;
-    }
+
 
     public Inventory() {}
     public Inventory(String[] itemArray, int itemQuantity) {
@@ -65,8 +63,7 @@ public class Inventory {
         return itemQuantity;
     }
 
-    public void setItemQuantity() {
+    public void setItemQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
-
 }

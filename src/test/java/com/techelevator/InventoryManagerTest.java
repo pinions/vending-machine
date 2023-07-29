@@ -3,6 +3,8 @@ package com.techelevator;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+
 public class InventoryManagerTest
 {
     @Test
@@ -11,10 +13,14 @@ public class InventoryManagerTest
         // Arrange and Act
         InventoryManager inventoryManager = new InventoryManager();
 
+        File inventoryInput = new File("alternate.csv");
+
 
 
         // Assert
-        //Assert.assertEquals( , inventoryManager.);
+        Assert.assertEquals(  , inventoryManager.addToArray());
+        Assert.assertEquals( , inventoryManager.printEachItem());
+
 
 
 

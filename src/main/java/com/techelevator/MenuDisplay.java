@@ -29,7 +29,8 @@ public class MenuDisplay {
                 case 1: // display items
                     System.out.println();
                     System.out.println("Displaying items.");
-                    inventoryManager.createInventory();
+                    inventoryManager.addToArray();
+                    inventoryManager.printEachItem();
                     break;
                 case 2: // purchase
                     System.out.println();

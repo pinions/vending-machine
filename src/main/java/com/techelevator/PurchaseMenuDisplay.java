@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -14,14 +15,15 @@ public class PurchaseMenuDisplay {
     private BigDecimal currentBalance = balanceTracker.getCurrentBalance();
 
     public void purchaseMenu() {
-        while (true) {
+        boolean stayOnPurchaseMenu = true;
+        while (stayOnPurchaseMenu) {
             System.out.println();
             System.out.println("Current Money Provided: " + currentBalance);
             System.out.println();
 
-            System.out.println("1) Feed Money");
-            System.out.println("2) Select Product");
-            System.out.println("3) Finish Transaction");
+            System.out.println("1) " + FEED_MONEY);
+            System.out.println("2) " + SELECT_PRODUCT);
+            System.out.println("3) " + FINISH_TRANSACTION);
 
             System.out.println();
             System.out.println("Please input a value 1 to 3.");
@@ -38,10 +40,10 @@ public class PurchaseMenuDisplay {
                     System.out.println("Select a product.");
                     // method here
                     break;
-                case "3": // exit
+                case "3": // return to main menu
                     System.out.println();
-                    System.out.println("Thank you for your patronage. Goodbye!");
-                    System.exit(1);
+                    System.out.println("Thank you for your patronage.");
+                    stayOnPurchaseMenu = false;
                     break;
                 default: // catch incorrect input
                     System.out.println();

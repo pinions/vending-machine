@@ -13,7 +13,9 @@ public class VendingMachineCLI {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	private MenuDisplay menuDisplay = new MenuDisplay();
-	private PurchaseMenuDisplay purchaseMenu = new PurchaseMenuDisplay();
+	private PurchaseMenuDisplay purchaseDisplay = new PurchaseMenuDisplay();
+	private BalanceTracker balanceTracker = new BalanceTracker();
+	private BigDecimal currentBalance = balanceTracker.getCurrentBalance();
 
 	public static void main(String[] args) {
 		VendingMachineCLI cli = new VendingMachineCLI();
@@ -22,7 +24,7 @@ public class VendingMachineCLI {
 
 	public void run() {
 		menuDisplay.mainMenu();
-		purchaseMenu.purchaseMenu();
+		purchaseDisplay.purchaseMenu();
 	}
 
 }

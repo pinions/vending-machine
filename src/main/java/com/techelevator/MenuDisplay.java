@@ -4,61 +4,49 @@ import java.util.Scanner;
 
 public class MenuDisplay {
 
-    private static final String DISPLAY_ITEMS = "Display Vending Machine Items";
-    private static final String PURCHASE = "Purchase";
-    private static final String EXIT = "Exit";
+    private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
+    private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
+    private static final String MAIN_MENU_EXIT = "Exit";
     private static final Scanner scanner = new Scanner(System.in);
 
-    public void mainMenu()
-    {
-        System.out.println("1) " + DISPLAY_ITEMS);
-        System.out.println("2) " + PURCHASE);
-        System.out.println("3) " + EXIT);
+    private InventoryManager inventoryManager = new InventoryManager();
+    private PurchaseMenuDisplay purchaseMenu = new PurchaseMenuDisplay();
 
-        System.out.println();
-        System.out.println("Please input a number to select desired location: ");
-        String userInput = scanner.nextLine();
+    public void mainMenu() {
+        while (true) {
+            System.out.println();
+            System.out.println("1) " + MAIN_MENU_OPTION_DISPLAY_ITEMS);
+            System.out.println("2) " + MAIN_MENU_OPTION_PURCHASE);
+            System.out.println("3) " + MAIN_MENU_EXIT);
 
-        boolean incorrectInput = true;
-        PurchaseMenuDisplay display = new PurchaseMenuDisplay();
+            System.out.println();
+            System.out.println("Please input a value 1 to 3.");
+            String userInput = scanner.nextLine();
 
-        while (incorrectInput)
-        {
-            switch (userInput)
-            {
-                case "1":   // Display Vending Machine Items
+            switch (userInput) {
+                case "1": // display items
+                    System.out.println();
                     System.out.println("Displaying items.");
-                    System.out.println();
-
-                    // ROUTE TO DISPLAY ITEMS HERE
-
-
-                    incorrectInput = false;
+                    inventoryManager.createInventory();
                     break;
-
-                case "2":   // Purchase
-                    System.out.println("Purchase Menu selected.");
+                case "2": // purchase
                     System.out.println();
-
-                    // ROUTE TO PURCHASE MENU HERE
-                    display.purchaseMenu();
-
-                    incorrectInput = false;
+                    System.out.println("Displaying Purchase Menu.");
+                    purchaseMenu.purchaseMenu();
                     break;
-
-                case "3":   // exit -> ends program
-                    System.out.println("Thank you for your service, goodbye!");
+                case "3": // exit
+                    System.out.println();
+                    System.out.println("Thank you for your patronage. Goodbye!");
                     System.exit(1);
-
-                default: // loop back through if bad input
+                    break;
+                default: // catch incorrect input
                     System.out.println();
-                    System.out.println("Please input a number to select desired location: ");
-                    userInput = scanner.nextLine();
+                    System.out.println("Invalid input.");
                     break;
             }
+            System.out.println();
+            System.out.println("Press enter to return to the main menu.");
+            scanner.nextLine();
         }
-        System.out.println();
-        System.out.println("Thank you for your purchase.");
     }
-
 }

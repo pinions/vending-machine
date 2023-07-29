@@ -6,7 +6,7 @@ import java.text.NumberFormat;
 public class Inventory {
     private String itemLocation;
     private String itemName;
-    private double itemPrice;
+    private BigDecimal itemPrice;
     private String itemType;
     private int itemQuantity;
     private String[] itemArray;
@@ -21,7 +21,7 @@ public class Inventory {
         this.itemArray = itemArray;
         this.itemQuantity = itemQuantity;
     }
-    public Inventory(String itemLocation, String itemName, double itemPrice, String itemType, int itemQuantity) {
+    public Inventory(String itemLocation, String itemName, BigDecimal itemPrice, String itemType, int itemQuantity) {
         this.itemLocation = itemLocation;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
@@ -45,11 +45,11 @@ public class Inventory {
         this.itemName = itemName;
     }
 
-    public double getItemPrice() {
+    public BigDecimal getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(double itemPrice) {
+    public void setItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
     }
 

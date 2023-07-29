@@ -2,6 +2,7 @@ package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class InventoryManager {
             while (scanner.hasNextLine()) {
                 String item = scanner.nextLine();
                 String[] itemArray = item.split(",");
-                this.inventoryList.add(new Inventory(itemArray[0], itemArray[1], Double.parseDouble(itemArray[2]),
+                this.inventoryList.add(new Inventory(itemArray[0], itemArray[1], new BigDecimal(itemArray[2]),
                         itemArray[3], itemQuantity));
             }
             // looping through items to print

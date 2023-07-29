@@ -7,6 +7,8 @@ public class MenuDisplay {
     private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
     private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
     private static final String MAIN_MENU_EXIT = "Exit";
+    private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE };
+
     private static final Scanner scanner = new Scanner(System.in);
 
     private InventoryManager inventoryManager = new InventoryManager();
@@ -21,23 +23,23 @@ public class MenuDisplay {
 
             System.out.println();
             System.out.println("Please input a value 1 to 3.");
-            String userInput = scanner.nextLine();
+            int userInput = scanner.nextInt();
 
             switch (userInput) {
-                case "1": // display items
+                case 1: // display items
                     System.out.println();
                     System.out.println("Displaying items.");
                     inventoryManager.createInventory();
                     break;
-                case "2": // purchase
+                case 2: // purchase
                     System.out.println();
                     System.out.println("Displaying Purchase Menu.");
                     purchaseMenu.purchaseMenu();
                     break;
-                case "3": // exit
+                case 3: // exit
                     System.out.println();
                     System.out.println("Thank you for your patronage. Goodbye!");
-                    System.exit(1);
+                    System.exit(0);
                     break;
                 default: // catch incorrect input
                     System.out.println();

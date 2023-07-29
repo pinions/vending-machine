@@ -1,7 +1,5 @@
 package com.techelevator;
 
-import java.awt.*;
-import java.math.BigDecimal;
 import java.util.Scanner;
 
 /*
@@ -13,7 +11,7 @@ public class VendingMachineCLI {
 	private static final Scanner scanner = new Scanner(System.in);
 
 	private MenuDisplay menuDisplay = new MenuDisplay();
-	private PurchaseMenuDisplay purchaseMenu = new PurchaseMenuDisplay();
+	private PurchaseMenuDisplay purchaseDisplay = new PurchaseMenuDisplay();
 
 	public static void main(String[] args) {
 		VendingMachineCLI cli = new VendingMachineCLI();
@@ -22,7 +20,7 @@ public class VendingMachineCLI {
 
 	public void run() {
 		menuDisplay.mainMenu();
-		purchaseMenu.purchaseMenu();
+		purchaseDisplay.purchaseMenu();
 	}
 
 }

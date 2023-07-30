@@ -1,6 +1,5 @@
 package com.techelevator;
 
-import java.awt.*;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -34,7 +33,8 @@ public class PurchaseMenuDisplay {
                 case "1": // feed money into machine in int
                     System.out.println();
                     System.out.println("Please input a value in whole dollars.");
-                    feedMoney();
+                    userInput = scanner.nextLine();
+                    feedMoney(userInput);
                     break;
                 case "2": // purchase
                     System.out.println();
@@ -58,12 +58,10 @@ public class PurchaseMenuDisplay {
 
     }
 
-    public void feedMoney() {
-        String userInput = scanner.nextLine();
-
+    public void feedMoney(String userInput) {
         try {
             BigDecimal inputMoney = new BigDecimal(userInput);
-            currentBalance = currentBalance.add(inputMoney);
+            currentBalance = balanceTracker.addCurrentBalance(inputMoney);
 
             System.out.println("Current Money Provided: " + currentBalance);
         } catch (NumberFormatException e) {

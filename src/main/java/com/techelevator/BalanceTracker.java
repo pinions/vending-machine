@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BalanceTracker {
     // Variables
-    private int amountInput;
+    private BigDecimal inputMoney;
     private BigDecimal currentBalance = BigDecimal.valueOf(0.00);   // tracks TOTAL
     private BigDecimal startingBalance = BigDecimal.valueOf(0.00);  // resets TOTAL to 0
 
@@ -16,19 +16,32 @@ public class BalanceTracker {
     }
 
     // ------------------  setters  ---------------------
-    public void setCurrentBalanceAdded(BigDecimal balanceAdded)  // FEED MONEY
-    {
-        this.currentBalance = getCurrentBalance().add(balanceAdded);
+
+    public void setCurrentBalance(BigDecimal currentBalance) {
+        this.currentBalance = currentBalance;
     }
 
-    public void setCurrentBalanceSubtracted(BigDecimal purchasePrice)     // subtract after each product dispense
-    {
-        this.currentBalance = getCurrentBalance().subtract(purchasePrice);
-    }
+//    public void setCurrentBalanceAdded(BigDecimal balanceAdded)  // FEED MONEY
+//    {
+//        this.currentBalance = currentBalance.add(balanceAdded);
+//    }
+//
+//    public void setCurrentBalanceSubtracted(BigDecimal purchasePrice)     // subtract after each product dispense
+//    {
+//        this.currentBalance = currentBalance.subtract(purchasePrice);
+//    }
 
     public void setCurrentToStartBalance()
     {
         this.currentBalance = startingBalance;
+    }
+
+    public BigDecimal addCurrentBalance(BigDecimal inputMoney) {
+        return currentBalance.add(inputMoney);
+    }
+
+    public BigDecimal subtractCurrentBalance(BigDecimal inputMoney) {
+        return currentBalance.subtract(inputMoney);
     }
 
 }

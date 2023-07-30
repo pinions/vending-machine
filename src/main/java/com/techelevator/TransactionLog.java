@@ -1,9 +1,6 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -15,26 +12,26 @@ public class TransactionLog {
     // TODO do they want this to be a new file every time?
     public void createFile() {
         File transactionLog = new File("transaction-log.txt");
-        try {
-            transactionLog.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+        if (!transactionLog.exists()) {
+            try {
+                transactionLog.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         System.out.println();
-        System.out.println("File located at " + transactionLog.getName());
     }
 
-    // TODO not sure how to get the amount deposited, spent, or given as change
-    // TODO new balance seems easier but who knows
-    // TODO not sure what input to put in lol
-    public void printToFile(File transactionLog, String transaction, BigDecimal userInput) {
-        NumberFormat numFormat = NumberFormat.getCurrencyInstance();
+    // TODO do not print if input is invalid
+    public void printToFile(File transactionLog, String transaction, BigDecimal moneyChange, BigDecimal currentBalance) {
+        NumberFormat num = NumberFormat.getCurrencyInstance();
 
-        try (PrintWriter writer = new PrintWriter(transactionLog)) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(transactionLog, true))) {
             writer.println(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm:ss a").format(LocalDateTime.now())
-                    + " " + transaction + ": " + numFormat.format(userInput) + " "
-                    + numFormat.format(balanceTracker.getCurrentBalance()));
-        } catch (FileNotFoundException e) {
+                    + " " + transaction + ": " + num.format(moneyChange) + " "
+                    + num.format(currentBalance));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

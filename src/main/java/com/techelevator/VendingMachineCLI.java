@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Scanner;
@@ -23,8 +24,11 @@ public class VendingMachineCLI {
 	private List<InventoryManager> inventoryList = inventoryManager.getInventoryList();
 	private BalanceTracker balanceTracker = new BalanceTracker();
 	private August august = new August();
+	private TransactionLog transactionLog = new TransactionLog();
 
-	private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
+	private File transactionFile = new File("transaction-log.txt");
+
+	private final NumberFormat num = NumberFormat.getCurrencyInstance();
 
 	public static void main(String[] args) {
 		VendingMachineCLI cli = new VendingMachineCLI();
@@ -32,6 +36,7 @@ public class VendingMachineCLI {
 	}
 
 	public void run() {
+		transactionLog.createFile();
 		mainMenu();
 		purchaseMenu();
 		productDisplay();
@@ -80,7 +85,8 @@ public class VendingMachineCLI {
 		boolean stayOnPurchaseMenu = true;
 		while (stayOnPurchaseMenu) {
 			System.out.println();
-			System.out.println("Current Money Provided: " + numberFormat.format(balanceTracker.getCurrentBalance()));
+			System.out.println("Current Money Provided: "
+					+ num.format(balanceTracker.getCurrentBalance()));
 			System.out.println();
 
 			System.out.println("1) " + FEED_MONEY);
@@ -96,7 +102,9 @@ public class VendingMachineCLI {
 					System.out.println();
 					System.out.println("Please input a value in whole dollars.");
 					userInput = scanner.nextLine();
-					balanceTracker.feedMoney(userInput);
+					transactionLog.printToFile(transactionFile,
+							FEED_MONEY.toUpperCase(), balanceTracker.feedMoney(userInput),
+							balanceTracker.getCurrentBalance());
 					break;
 				case "2": // purchase
 					System.out.println();
@@ -106,8 +114,12 @@ public class VendingMachineCLI {
 				case "3": // return to main menu
 					System.out.println();
 					System.out.println("Thank you for your patronage. Dispensing "
-							+ balanceTracker.getCurrentBalance() + " in change.");
-					balanceTracker.subtractCurrentBalance(balanceTracker.getCurrentBalance());
+							+ num.format(balanceTracker.getCurrentBalance()) + " in change.");
+
+					transactionLog.printToFile(transactionFile, "GET CHANGE",
+							balanceTracker.getCurrentBalance(),
+							balanceTracker.subtractCurrentBalance(balanceTracker.getCurrentBalance()));
+
 					stayOnPurchaseMenu = false;
 					// TODO how to return to main menu without extra step :|
 					break;
@@ -135,8 +147,6 @@ public class VendingMachineCLI {
 	}
 
 	// TODO check for value in array and catch invalid input without printing for whole list
-	// TODO honestly this is way too complicated and needs to be broken up but idk how
-	// TODO BOGODO is in another class but there has to be a cleaner way to implement it?
 	public void purchaseProduct(String userInput) {
 		for (InventoryManager inventoryItem : inventoryList) {
 			if (userInput.equals(inventoryItem.getItemLocation())
@@ -149,6 +159,10 @@ public class VendingMachineCLI {
 				balanceTracker.subtractItemPriceFromBalance(august.isAugust(),
 						august.getAugustCounter(), inventoryItem);
 				messageToDisplay(inventoryItem);
+
+				transactionLog.printToFile(transactionFile, inventoryItem.getItemName(),
+						inventoryItem.getItemPrice(),
+						balanceTracker.getCurrentBalance());
 				break;
 			} else if (userInput.equals(inventoryItem.getItemLocation())
 					&& inventoryItem.getItemQuantity() == 0) {

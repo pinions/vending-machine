@@ -1,10 +1,12 @@
 package com.techelevator;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 public class BalanceTracker implements Accountable {
     // Variables
     private BigDecimal currentBalance = BigDecimal.valueOf(0);   // tracks TOTAL
+    private final NumberFormat num = NumberFormat.getCurrencyInstance();
 
     // --------------  getters  -----------------
     public BigDecimal getCurrentBalance() {
@@ -33,7 +35,7 @@ public class BalanceTracker implements Accountable {
             BigDecimal inputMoney = new BigDecimal(userInput);
             addCurrentBalance(inputMoney);
 
-            System.out.println("Current Money Provided: " + getCurrentBalance());
+            System.out.println("Current Money Provided: " + num.format(getCurrentBalance()));
         } catch (NumberFormatException e) {
             System.out.println();
             System.out.println("Invalid input. Please input a value in whole dollars.");
@@ -59,8 +61,8 @@ public class BalanceTracker implements Accountable {
         subtractCurrentBalance(itemPrice);
 
         System.out.println();
-        System.out.println(inventoryItem.getItemName() + " cost " + itemPrice
-                + ". You now have " + getCurrentBalance() + ".");
+        System.out.println(inventoryItem.getItemName() + " cost " + num.format(itemPrice)
+                + ". You now have " + num.format(getCurrentBalance()) + ".");
 
         return getCurrentBalance();
     }

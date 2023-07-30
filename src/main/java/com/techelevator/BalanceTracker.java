@@ -3,7 +3,7 @@ package com.techelevator;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
-public class BalanceTracker implements Accountable {
+public class BalanceTracker {
     // Variables
     private BigDecimal currentBalance = BigDecimal.valueOf(0);   // tracks TOTAL
     private final NumberFormat num = NumberFormat.getCurrencyInstance();

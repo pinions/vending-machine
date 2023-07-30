@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TransactionLog {
-    public BalanceTracker balanceTracker = new BalanceTracker();
     private File transactionLog = new File("Log.txt");
 
     public void setTransactionLog(File transactionLog) {

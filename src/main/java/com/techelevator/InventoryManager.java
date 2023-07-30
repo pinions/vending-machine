@@ -8,9 +8,63 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InventoryManager {
-    private List<Inventory> inventoryList = new ArrayList<>();
-    private static int itemQuantity = 5;
+    private List<InventoryManager> inventoryList = new ArrayList<>();
     private File inventoryInput = new File("main.csv");
+
+    private String itemLocation;
+    private String itemName;
+    private BigDecimal itemPrice;
+    private String itemType;
+    private int itemQuantity;
+
+    public InventoryManager() {}
+    public InventoryManager(String itemLocation, String itemName, BigDecimal itemPrice, String itemType, int itemQuantity) {
+        this.itemLocation = itemLocation;
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemType = itemType;
+        this.itemQuantity = 5;
+    }
+
+    public String getItemLocation() {
+        return itemLocation;
+    }
+
+    public void setItemLocation(String itemLocation) {
+        this.itemLocation = itemLocation;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public BigDecimal getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public int getItemQuantity() {
+        return itemQuantity;
+    }
+
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
 
     public void addToArray()
     {
@@ -21,7 +75,7 @@ public class InventoryManager {
             {
                 String item = scanner.nextLine();
                 String[] itemArray = item.split(",");
-                this.inventoryList.add(new Inventory(itemArray[0], itemArray[1], new BigDecimal(itemArray[2]),
+                this.inventoryList.add(new InventoryManager(itemArray[0], itemArray[1], new BigDecimal(itemArray[2]),
                         itemArray[3], itemQuantity));
             }
         }
@@ -34,16 +88,26 @@ public class InventoryManager {
     public void printEachItem()
     {
         // looping through items to print
-        for (Inventory inventory : inventoryList)
-        {
-            System.out.println(inventory.getItemLocation() + "\t" + inventory.getItemName() + "\t"
-                    + inventory.getItemPrice() + "\t" + inventory.getItemType() + "\t"
-                    + inventory.getItemQuantity());
+        for (InventoryManager inventoryItem : inventoryList) {
+            if (inventoryItem.getItemQuantity() == 0) {
+                System.out.println(inventoryItem.getItemLocation() + "\t" + inventoryItem.getItemName() + "\t"
+                        + inventoryItem.getItemPrice() + "\t" + inventoryItem.getItemType() + "\t"
+                        + " SOLD OUT");
+            } else {
+                System.out.println(inventoryItem.getItemLocation() + "\t" + inventoryItem.getItemName() + "\t"
+                        + inventoryItem.getItemPrice() + "\t" + inventoryItem.getItemType() + "\t"
+                        + inventoryItem.getItemQuantity());
+            }
         }
     }
 
-    public List<Inventory> getInventoryList() {
+    public List<InventoryManager> getInventoryList() {
         return inventoryList;
+    }
+
+    public int subtractItemQuantity() {
+        itemQuantity -= 1;
+        return getItemQuantity();
     }
 
 }

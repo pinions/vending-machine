@@ -12,7 +12,6 @@ public class VendingMachineCLI {
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_EXIT = "Exit";
-	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE };
 
 	private static final String FEED_MONEY = "Feed Money";
 	private static final String SELECT_PRODUCT = "Select Product";
@@ -20,16 +19,12 @@ public class VendingMachineCLI {
 
 	private static final Scanner scanner = new Scanner(System.in);
 
-	private ProductDisplay productDisplay = new ProductDisplay();
 	private InventoryManager inventoryManager = new InventoryManager();
-	private PurchaseDisplay purchaseDisplay = new PurchaseDisplay();
+	private List<InventoryManager> inventoryList = inventoryManager.getInventoryList();
 	private BalanceTracker balanceTracker = new BalanceTracker();
 	private August august = new August();
 
 	private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
-
-	private List<Inventory> inventoryList = inventoryManager.getInventoryList();
-
 
 	public static void main(String[] args) {
 		VendingMachineCLI cli = new VendingMachineCLI();
@@ -39,7 +34,7 @@ public class VendingMachineCLI {
 	public void run() {
 		mainMenu();
 		purchaseMenu();
-		productDisplay.productDisplay();
+		productDisplay();
 	}
 
 	public void mainMenu() {
@@ -85,7 +80,7 @@ public class VendingMachineCLI {
 		boolean stayOnPurchaseMenu = true;
 		while (stayOnPurchaseMenu) {
 			System.out.println();
-			System.out.println("Current Money Provided: " + balanceTracker.getCurrentBalance());
+			System.out.println("Current Money Provided: " + numberFormat.format(balanceTracker.getCurrentBalance()));
 			System.out.println();
 
 			System.out.println("1) " + FEED_MONEY);
@@ -101,19 +96,20 @@ public class VendingMachineCLI {
 					System.out.println();
 					System.out.println("Please input a value in whole dollars.");
 					userInput = scanner.nextLine();
-					purchaseDisplay.addCurrentBalance(userInput);
+					balanceTracker.feedMoney(userInput);
 					break;
 				case "2": // purchase
 					System.out.println();
 					System.out.println("Select a product.");
-					productDisplay.productDisplay();
+					productDisplay();
 					break;
 				case "3": // return to main menu
 					System.out.println();
 					System.out.println("Thank you for your patronage. Dispensing "
 							+ balanceTracker.getCurrentBalance() + " in change.");
+					balanceTracker.subtractCurrentBalance(balanceTracker.getCurrentBalance());
 					stayOnPurchaseMenu = false;
-					// TODO how to return to main menu :|
+					// TODO how to return to main menu without extra step :|
 					break;
 				default: // catch incorrect input
 					System.out.println();
@@ -125,6 +121,61 @@ public class VendingMachineCLI {
 			scanner.nextLine();
 		}
 
+	}
+
+	public void productDisplay() {
+		inventoryManager.addToArray();
+		inventoryManager.printEachItem();
+
+		System.out.println();
+		System.out.println("Please input the location of your purchase.");
+
+		String userInput = scanner.nextLine();
+		purchaseProduct(userInput);
+	}
+
+	// TODO check for value in array and catch invalid input without printing for whole list
+	// TODO honestly this is way too complicated and needs to be broken up but idk how
+	// TODO BOGODO is in another class but there has to be a cleaner way to implement it?
+	public void purchaseProduct(String userInput) {
+		for (InventoryManager inventoryItem : inventoryList) {
+			if (userInput.equals(inventoryItem.getItemLocation())
+					&& inventoryItem.getItemQuantity() > 0
+					&& balanceTracker.getCurrentBalance().compareTo(inventoryItem.getItemPrice()) >= 0) {
+				inventoryItem.subtractItemQuantity();
+				System.out.println();
+				System.out.println("Thank you for your purchase! Please enjoy your "
+						+ inventoryItem.getItemName() + ".");
+				balanceTracker.subtractItemPriceFromBalance(august.isAugust(),
+						august.getAugustCounter(), inventoryItem);
+				messageToDisplay(inventoryItem);
+				break;
+			} else if (userInput.equals(inventoryItem.getItemLocation())
+					&& inventoryItem.getItemQuantity() == 0) {
+				System.out.println("Sorry! " + inventoryItem.getItemName()
+						+ " is currently sold out.");
+				break;
+			} else if (balanceTracker.getCurrentBalance().compareTo(inventoryItem.getItemPrice()) < 0) {
+				System.out.println("Sorry! You don't have enough money.");
+				break;
+			}
+		}
+	}
+
+	public void messageToDisplay(InventoryManager inventoryItem) {
+		if (inventoryItem.getItemType().equalsIgnoreCase("gum")) {
+			String gumMessage = "Chew Chew, Yum!";
+			System.out.println(gumMessage);
+		} else if (inventoryItem.getItemType().equalsIgnoreCase("drink")) {
+			String drinkMessage = "Glug Glug, Yum!";
+			System.out.println(drinkMessage);
+		} else if (inventoryItem.getItemType().equalsIgnoreCase("candy")) {
+			String candyMessage = "Yummy Yummy, So Sweet!";
+			System.out.println(candyMessage);
+		} else {
+			String munchyMessage = "Crunch Crunch, Yum!";
+			System.out.println(munchyMessage);
+		}
 	}
 
 }

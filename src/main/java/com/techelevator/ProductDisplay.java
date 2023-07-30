@@ -23,16 +23,41 @@ public class ProductDisplay {
         System.out.println();
         System.out.println("Please input the location of your purchase.");
         String userInput = scanner.nextLine();
+        purchaseProduct(userInput);
+    }
 
+    public void purchaseProduct(String userInput) {
         for (Inventory inventoryItem : inventoryList) {
-            if (userInput.equals(inventoryItem.getItemLocation()) && inventoryItem.getItemQuantity() > 0 && currentBalance.compareTo(inventoryItem.getItemPrice()) >= 0) {
+            if (userInput.equals(inventoryItem.getItemLocation())
+                    && inventoryItem.getItemQuantity() > 0
+                    && currentBalance.compareTo(inventoryItem.getItemPrice()) >= 0) {
                 itemQuantity--;
-                System.out.println("Thank you for your purchase! Please enjoy your " + inventoryItem.getItemName());
-            } else if (userInput.equals(inventoryItem.getItemLocation()) && inventoryItem.getItemQuantity() == 0) {
-                System.out.println("Sorry! " + inventoryItem.getItemName() + " is currently sold out.");
+                System.out.println("Thank you for your purchase! Please enjoy your "
+                        + inventoryItem.getItemName());
+                messageToDisplay(inventoryItem);
+            } else if (userInput.equals(inventoryItem.getItemLocation())
+                    && inventoryItem.getItemQuantity() == 0) {
+                System.out.println("Sorry! " + inventoryItem.getItemName()
+                        + " is currently sold out.");
             }
             System.out.println(inventoryItem.getItemLocation() + " " + inventoryItem.getItemQuantity() + " " + currentBalance + " " + inventoryItem.getItemPrice());
             System.out.println("Invalid input.");
+        }
+    }
+
+    public void messageToDisplay(Inventory inventoryItem) {
+        if (inventoryItem.getItemType().equalsIgnoreCase("gum")) {
+            String gumMessage = "Chew Chew, Yum!";
+            System.out.println(gumMessage);
+        } else if (inventoryItem.getItemType().equalsIgnoreCase("drink")) {
+            String drinkMessage = "Glug Glug, Yum!";
+            System.out.println(drinkMessage);
+        } else if (inventoryItem.getItemType().equalsIgnoreCase("candy")) {
+            String candyMessage = "Yummy Yummy, So Sweet!";
+            System.out.println(candyMessage);
+        } else {
+            String munchyMessage = "Crunch Crunch, Yum!";
+            System.out.println(munchyMessage);
         }
     }
 }

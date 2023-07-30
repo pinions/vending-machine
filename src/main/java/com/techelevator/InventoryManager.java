@@ -45,4 +45,5 @@ public class InventoryManager {
     public List<Inventory> getInventoryList() {
         return inventoryList;
     }
+
 }

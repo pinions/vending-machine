@@ -3,6 +3,8 @@ package com.techelevator;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Calendar;
+
 public class AugustTest
 {
     @Test
@@ -15,8 +17,7 @@ public class AugustTest
         august.setAugustCounter(2);
 
         // Assert
+
         Assert.assertEquals( 3, august.getAugustCounter());
-        // Assert.assertEquals( false, august.isAugust());
-        // Assert.assertEquals( true, august.isAugust());
     }
 }

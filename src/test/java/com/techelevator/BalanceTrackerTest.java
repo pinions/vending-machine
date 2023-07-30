@@ -3,7 +3,10 @@ package com.techelevator;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BalanceTrackerTest
 {
@@ -84,13 +87,23 @@ public class BalanceTrackerTest
     {
         // Arrange
         BalanceTracker balanceTracker = new BalanceTracker();
-        InventoryManager inventoryItem = new InventoryManager();
+        InventoryManager inventoryManager = new InventoryManager();
+        List<InventoryManager> inventoryList = new ArrayList<>();
+
+        inventoryList.add(new InventoryManager("A1", "U-Chews",BigDecimal.valueOf(1.65),"Gum",5));
+        inventoryList.add(new InventoryManager("B1", "Ginger Ayle",BigDecimal.valueOf(1.85),"Drink",3));
+        inventoryList.add(new InventoryManager("C1", "Snykkers",BigDecimal.valueOf(4.25),"Candy",2));
 
         // Act
-        BigDecimal gumDiscounted = BigDecimal.valueOf(items price - 1);
+        BigDecimal dollar = BigDecimal.valueOf(1);
+        BigDecimal gumDiscounted = inventoryList.get(0).getItemPrice();
+        BigDecimal drinkDiscounted = inventoryList.get(1).getItemPrice();
+        BigDecimal candyDiscounted = inventoryList.get(2).getItemPrice().subtract(dollar);
 
         // Assert
-        Assert.assertEquals(gumDiscounted, balanceTracker.getDollarOff(true, 0, itemhere ));
+        Assert.assertEquals(gumDiscounted, balanceTracker.getDollarOff(true, 3, inventoryList.get(0)));
+        Assert.assertEquals(drinkDiscounted, balanceTracker.getDollarOff(false, 4, inventoryList.get(1)));
+        Assert.assertEquals(candyDiscounted, balanceTracker.getDollarOff(true, 8, inventoryList.get(2)));
 
     }
 

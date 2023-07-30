@@ -25,6 +25,7 @@ public class InventoryTest
 
         inventory.setItemType("fruit");
 
+
         // Assert
         Assert.assertEquals( "B1", inventory.getItemLocation() );
         Assert.assertEquals( "Apple", inventory.getItemName() );

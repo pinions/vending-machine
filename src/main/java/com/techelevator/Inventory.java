@@ -1,7 +1,6 @@
 package com.techelevator;
 
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 
 public class Inventory {
     private String itemLocation;
@@ -9,7 +8,6 @@ public class Inventory {
     private BigDecimal itemPrice;
     private String itemType;
     private int itemQuantity;
-    private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
 
     public Inventory() {}
     public Inventory(String itemLocation, String itemName, BigDecimal itemPrice, String itemType, int itemQuantity) {

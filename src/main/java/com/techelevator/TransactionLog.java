@@ -8,11 +8,18 @@ import java.time.format.DateTimeFormatter;
 
 public class TransactionLog {
     public BalanceTracker balanceTracker = new BalanceTracker();
+    private File transactionLog = new File("Log.txt");
+
+    public void setTransactionLog(File transactionLog) {
+        this.transactionLog = transactionLog;
+    }
+
+    public String getTransactionLogPath() {
+        return transactionLog.getPath();
+    }
 
     // TODO do they want this to be a new file every time?
     public void createFile() {
-        File transactionLog = new File("transaction-log.txt");
-
         if (!transactionLog.exists()) {
             try {
                 transactionLog.createNewFile();

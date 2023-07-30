@@ -26,7 +26,7 @@ public class VendingMachineCLI {
 	private August august = new August();
 	private TransactionLog transactionLog = new TransactionLog();
 
-	private File transactionFile = new File("transaction-log.txt");
+	private File transactionFile = new File(transactionLog.getTransactionLogPath());
 
 	private final NumberFormat num = NumberFormat.getCurrencyInstance();
 

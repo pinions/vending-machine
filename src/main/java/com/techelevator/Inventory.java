@@ -9,16 +9,9 @@ public class Inventory {
     private BigDecimal itemPrice;
     private String itemType;
     private int itemQuantity;
-    private String[] itemArray;
     private final NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
 
-
-
     public Inventory() {}
-    public Inventory(String[] itemArray, int itemQuantity) {
-        this.itemArray = itemArray;
-        this.itemQuantity = itemQuantity;
-    }
     public Inventory(String itemLocation, String itemName, BigDecimal itemPrice, String itemType, int itemQuantity) {
         this.itemLocation = itemLocation;
         this.itemName = itemName;
@@ -66,4 +59,5 @@ public class Inventory {
     public void setItemQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
+
 }

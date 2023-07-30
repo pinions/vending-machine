@@ -13,6 +13,7 @@ public class PurchaseMenuDisplay {
 
     private BalanceTracker balanceTracker = new BalanceTracker();
     private BigDecimal currentBalance = balanceTracker.getCurrentBalance();
+    private ProductDisplay productDisplay = new ProductDisplay();
 
     public void purchaseMenu() {
         boolean stayOnPurchaseMenu = true;
@@ -38,7 +39,7 @@ public class PurchaseMenuDisplay {
                 case "2": // purchase
                     System.out.println();
                     System.out.println("Select a product.");
-                    // method here
+                    productDisplay.productDisplay();
                     break;
                 case "3": // return to main menu
                     System.out.println();

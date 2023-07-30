@@ -41,4 +41,8 @@ public class InventoryManager {
                     + inventory.getItemQuantity());
         }
     }
+
+    public List<Inventory> getInventoryList() {
+        return inventoryList;
+    }
 }

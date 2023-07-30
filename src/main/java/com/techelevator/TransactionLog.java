@@ -18,7 +18,6 @@ public class TransactionLog {
         return transactionLog.getPath();
     }
 
-    // TODO do they want this to be a new file every time?
     public void createFile() {
         if (!transactionLog.exists()) {
             try {
@@ -30,7 +29,6 @@ public class TransactionLog {
         System.out.println();
     }
 
-    // TODO do not print if input is invalid
     public void printToFile(File transactionLog, String transaction, BigDecimal moneyChange, BigDecimal currentBalance) {
         NumberFormat num = NumberFormat.getCurrencyInstance();
 

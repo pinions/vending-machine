@@ -121,7 +121,6 @@ public class VendingMachineCLI {
 							balanceTracker.subtractCurrentBalance(balanceTracker.getCurrentBalance()));
 
 					stayOnPurchaseMenu = false;
-					// TODO how to return to main menu without extra step :|
 					break;
 				default: // catch incorrect input
 					System.out.println();
@@ -146,7 +145,6 @@ public class VendingMachineCLI {
 		purchaseProduct(userInput);
 	}
 
-	// TODO check for value in array and catch invalid input without printing for whole list
 	public void purchaseProduct(String userInput) {
 		for (InventoryManager inventoryItem : inventoryList) {
 			if (userInput.equals(inventoryItem.getItemLocation())
